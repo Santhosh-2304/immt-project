@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Sidebar({ user, homes, selectedHomeId, onHomeClick }) {
+  const navigate = useNavigate();
   return (
     <aside className="sidebar">
       <div className="user-info">
@@ -23,8 +26,11 @@ export default function Sidebar({ user, homes, selectedHomeId, onHomeClick }) {
               <span>{home.name || `Home ${index + 1}`}</span>
             </div>
             ))}
+            <div className='UserLink' onClick={() => navigate(`/User`)}>
+          <span className="icon"> 🙍🏻‍♂️ </span>
+          <span>Users</span>
+          </div>
         </div>
-
         <div className="menu-bottom">
           <Link to="/login" className="menu-item logout">
             <span className="icon">⤴️</span>
