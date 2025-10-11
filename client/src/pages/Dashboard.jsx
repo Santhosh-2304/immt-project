@@ -4,6 +4,7 @@ import api from '../api';
 import Sidebar from '../components/Sidebar';
 import LightsPieChart from "../components/LightsPieChart";
 
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -60,14 +61,14 @@ export default function Dashboard() {
   return (
     <div className="app-frame">
       <div className="app-card">
-        <Sidebar
+        <Sidebar variant="dashboard"
           user={user}
           homes={homes}
           selectedHomeId={selectedHomeId}
           onHomeClick={(id) => setSelectedHomeId(id)}
         />
 
-        <main className="main">
+        <main className="main ">
           <header className="main-header">
             <div>
               <h1>Dashboard</h1>
@@ -75,7 +76,7 @@ export default function Dashboard() {
             </div>
           </header>
 
-          <section className="cards">
+          <section className="cards slide-up">
             <div className="card status-card" onClick={(id) => navigate(`/homes/${selectedHomeId}/lights`)}>
               <h3>Status</h3>
               <div className="bars">
