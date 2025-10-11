@@ -6,8 +6,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const homesRoutes = require('./routes/homes');
-const userRoutes = require("./routes/userRoutes");
-const usersRoutes = require('./routes/users');//create user
+const users = require('./routes/users');//create user
 
 const app = express();
 
@@ -33,8 +32,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use('/api/auth', authRoutes);
 app.use('/api/homes', homesRoutes);
-app.use('/api/userRoutes',userRoutes);
-app.use('/api/users', usersRoutes);//create user
+app.use('/api/users', users);//create user
 
 const PORT = process.env.PORT || 5000;
 // bind to IPv4 explicitly
