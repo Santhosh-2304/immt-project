@@ -1,15 +1,25 @@
-const express = require('express');
+const express = require('express'); 
+const User = require('../models/User'); 
 const router = express.Router();
 
-// Very simple login: no password checking, returns demo user
 router.post('/login', async (req, res) => {
-  const { email } = req.body;
-  // In a real app check DB. Here we return a demo user
-  const user = {
-    name: 'Santhosh',
-    email: email || 'Santhosh@123'
-  };
-  res.json(user);
+  const { name, email, password } = req.body;
+  
+  try {
+    const users = await User.findOne({ email });
+
+    if (users) {
+      if (users.password === password) {
+        res.json({ message: "Success" });
+      } else {
+        res.json({ message: "Password is incorrect" });
+      }
+    } else {
+      res.json({ message: "User doesn't exist" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 module.exports = router;
