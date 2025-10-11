@@ -11,7 +11,6 @@ export default function UserCreate() {
   const [type, setType] = useState('Normal');
   const [email, setEmail] = useState('');
   const [isActive, setIsActive] = useState(true);
-  const [forgotPassword, setForgotPassword] = useState(false);
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState(null);
@@ -48,7 +47,6 @@ export default function UserCreate() {
         type,
         email,
         isActive,
-        forgotPassword,
       };
       await api.post('/users', payload);
       setSuccessMessage('User created successfully');
@@ -58,7 +56,6 @@ export default function UserCreate() {
       setType('Normal');
       setEmail('');
       setIsActive(true);
-      setForgotPassword(false);
       setErrors({});
     } catch (err) {
       const msg = err?.response?.data?.message || err.message || 'Failed to create user';
