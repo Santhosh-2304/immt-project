@@ -7,7 +7,6 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(''); // <-- New state
-  const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -19,7 +18,7 @@ export default function Login() {
 
         if (message === "Success") {
           localStorage.setItem('user', JSON.stringify({name,email})); // Store email or whatever you need
-          navigate('/dashboard');
+          navigate('/dashboard',{replace:true});
         } else {
           setErrorMessage(message); // Show error message
         }
@@ -30,14 +29,8 @@ export default function Login() {
       });
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-
   return (
-    <div className={`login-container ${animate ? 'animate' : ''}`}>
+    <div className='login-container'>
      <div className='login-left '>
      <div className="overlay slide-up">
           <h1>Smarter Living, Simplified</h1>
