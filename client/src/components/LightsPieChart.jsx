@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#21ac9bff", "#b63221ff"]; // Teal = On, Red = Off
+const COLORS = ["#94b4ffff", "#9baeb4"]; 
 
 export default function LightsPieChart({ lights }) {
   const total = lights.length;
@@ -31,7 +31,7 @@ export default function LightsPieChart({ lights }) {
           cy="50%"
           innerRadius={50}
           outerRadius={80}
-          paddingAngle={3}
+          paddingAngle={0}
           label={({ name, value }) => `${name}  ${value}`}
           isAnimationActive={true}
         >
