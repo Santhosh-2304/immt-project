@@ -88,14 +88,14 @@ export default function Lights() {
       </div>
       <div className='lights-assembly'>
         <div className='side'>
-            <Sidebar
+            <Sidebar variant="light"
                     user={user}
                     homes={homes}
                     onHomeClick={(homeId) => navigate(`/homes/${homeId}/lights`)|| setSelectedHomeId(homeId) }
                     selectedHomeId={id}
                     />
         </div>
-      <div className="lights-grid">
+      <div className="lights-grid slide-up">
         {home.lights.map(l => (
           <div key={l._id} className="light-row">
             <div>
