@@ -6,7 +6,7 @@ const User = require('../models/User');
 // GET /api/users  -> list all users (useful later)
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
+    const users = await User.find().sort({ createdAt: 1 });
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -73,5 +73,30 @@ router.patch('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+router.get('/:id', async (req,res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
+  } catch (err) { res.status(500).json({ message: err.message }); }
+});
+
+router.delete("/delete/:id",async (req,res) => {
+    try {
+      const { id } = req.params;
+      if (!id || id === 'undefined') {
+      return res.status(400).json({ message: 'Invalid user ID' });
+      }
+        const userExist = await User.findById(id);
+        if (!userExist) {
+        return res.status(404).json({ message: "User not found." });
+        }
+        const user = await User.findByIdAndDelete(id)
+        res.status(200).json({ message: "User deleted successfully." });
+    } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
+})
 
 module.exports = router;
